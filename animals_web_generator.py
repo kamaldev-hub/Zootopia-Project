@@ -11,16 +11,18 @@ animals_data = load_data('animals_data.json')
 
 
 def generate_animal_info(animals_data):
-    """ Generates a string with the required information for each animal """
-    output = ''  # define an empty string
+    """Generates a string with the required information for each animal in HTML format."""
+    output = '<ul class="cards">\n'  # Start the unordered list
     for animal in animals_data:
+        output += '<li class="cards__item">\n'
         if 'name' in animal:
-            output += f"Name: {animal['name']}\n"
+            output += f"Name: {animal['name']}<br/>\n"
         if 'characteristics' in animal and 'diet' in animal['characteristics']:
-            output += f"Diet: {animal['characteristics']['diet']}\n"
+            output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
         if 'locations' in animal and len(animal['locations']) > 0:
-            output += f"Location: {animal['locations'][0]}\n"
-        output += "\n"  # add a newline to separate each animal's information
+            output += f"Location: {animal['locations'][0]}<br/>\n"
+        output += '</li>\n'  # Close the list item
+    output += '</ul>'  # Close the unordered list
     return output
 
 
