@@ -1,18 +1,23 @@
-import json
+import requests
 
 
-def load_data(file_path):
-    """ Loads a JSON file """
-    with open(file_path, "r") as handle:
-        return json.load(handle)
+def fetch_animal_data(animal_name):
+    """Fetches animal data from the Ninja API"""
+    API_KEY = "gTbcY2BwGi1Gj/oarE+aWg==FWIsZ8CbNm9KwGQN"
+    BASE_URL = f"https://api.api-ninjas.com/v1/animals?name={animal_name}"
+    headers = {'X-Api-Key': API_KEY}
+
+    response = requests.get(BASE_URL, headers=headers)
+    animals_data = response.json()
+    return animals_data
 
 
-animals_data = load_data('animals_data.json')
-
-
-def generate_animal_info(animals_data):
+def generate_animal_info(animals_data, animal_name):
     """Generates a string with the required information for each animal in HTML format."""
-    output = '<ul class="cards">\n'  # Start the unordered list
+    if not animals_data:
+        return f"<h2>the animal '{animal_name}' does not exist.</h2>"
+
+    output = '<ul class="cards">\n'  # Start the unordered list#
     for animal in animals_data:
         output += '<li class="cards__item">\n'
         if 'name' in animal:
@@ -44,8 +49,17 @@ def replace_template_content(template_path, animals_info, output_path):
     print("The HTML file has been generated successfully.")
 
 
+def gets_users_animal_input():
+    animal_name = input("Enter the animal name: ")
+    return animal_name
+
+
+animal_name = gets_users_animal_input()
+
+animals_data = fetch_animal_data(animal_name)
+
 # Generate the animal information string
-animals_info = generate_animal_info(animals_data)
+animals_info = generate_animal_info(animals_data, animal_name)
 
 # Replace the template content and write to a new file
 replace_template_content('animals_template.html', animals_info, 'animals.html')
