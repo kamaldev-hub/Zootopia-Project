@@ -11,7 +11,6 @@ This project fetches animal data from an API and generates a simple HTML webpage
 - `data_fetcher.py`: Handles API requests to fetch animal data
 - `README.md`: This file, providing project information
 - `requirements.txt`: List of Python dependencies
-- `settings`: Configuration file for project settings
 
 ## Setup
 
