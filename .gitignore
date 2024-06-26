@@ -1,1 +1,5 @@
 .env
+.idea/
+*.iml
+animals_data.json
+__pycache__/
