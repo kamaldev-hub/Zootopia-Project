@@ -1,6 +1,10 @@
 from data_fetcher import fetch_animal_data
 
 
+def get_user_animal_input():
+    return input("Enter the animal name: ")
+
+
 def generate_animal_info(animals_data, animal_name):
     """Generates a string with the required information for each animal in HTML format."""
     if not animals_data:
@@ -38,14 +42,17 @@ def replace_template_content(animals_info):
     print(f"The HTML file has been generated successfully at: {output_path}")
 
 
-def get_user_animal_input():
-    return input("Enter the animal name: ")
-
-
 def main():
+    # Get the animal name from the user
     animal_name = get_user_animal_input()
+
+    # Fetch data for the specified animal
     animals_data = fetch_animal_data(animal_name)
+
+    # Generate HTML for the animal information
     animals_info = generate_animal_info(animals_data, animal_name)
+
+    # Update the HTML template with the generated animal info
     replace_template_content(animals_info)
 
 
